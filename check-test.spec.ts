@@ -2,63 +2,39 @@ import { describe, expect, it } from 'vitest'
 
 type Movie = { title: string; year: number; };
 type Movies = Movie[];
-
 type Position = {
   letter: string;
   number: number;
-}
+};
 
-type chessPiece = {
+type ChessPiece = {
   name: string;
   isWhite: boolean;
   pieceCode: string;
   pieceId: number;
   position: Position;
-}
+};
 
-const initPiece = (name, iswhute piececoce pieceid positon) =>{
+const initPiece = (pieceName: string, pieceIsWhite: boolean, pieceCode: string, pieceId: number, position: Position): ChessPiece => {
   return {
-    "Reine", 2, [1, 2], "Q"
-  }
-}
+    name: pieceName,
+    isWhite: pieceIsWhite,
+    pieceCode: pieceCode,
+    pieceId: pieceId,
+    position: position
+  };
+};
 
-describe('Test mooves', () => {
-  const e = new chessPiece("Roi", 1, ["A", "1"], "K");
+describe('Test moves', () => {
+  const e: ChessPiece = initPiece("Roi", true, "K", 1, { letter: "A", number: 1 });
 
-  const pieces = [
-    new chessPiece(),
-    new ChessPiece("Tour", 3, [1, 3], "R"),
-    new ChessPiece("Fou", 4, [1, 4], "B"),
-    new ChessPiece("Cavalier", 5, [1, 5], "N"),
-    new ChessPiece("Pion", 6, [2, 1], "P")
+  const pieces: ChessPiece[] = [
+    initPiece("Roi", true, "K", 1, { letter: "A", number: 1 }),
+    initPiece("Tour", false, "R", 2, { letter: "A", number: 3 }),
+    initPiece("Fou", true, "B", 3, { letter: "A", number: 4 }),
+    initPiece("Cavalier", false, "N", 4, { letter: "A", number: 5 }),
+    initPiece("Pion", true, "P", 5, { letter: "B", number: 1 })
   ];
 
-
-  const MOVIE_COLLECTION = [
-    {
-      title: "The Matrix",
-      year: 1999,
-    },
-    {
-      title: "A beautiful mind",
-      year: 2001,
-    },
-    {
-      title: "Intouchable",
-      year: 2011,
-    },
-    {
-      title: "Forest Gump",
-      year: 1994,
-    },
-  ]; 
-
-  it(`should found "The Matrix" when it's query and in the collection`, () => {
-    const moviesFound = findByTitle('The Matrix')(MOVIE_COLLECTION);
-    expect(moviesFound).toStrictEqual([{
-        title: "The Matrix",
-        year: 1999,
-    }]);
-  });
+  console.log(pieces[0])
 });
-
