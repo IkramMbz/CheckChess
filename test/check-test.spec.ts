@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
 type Position = {
-  letter: string;
-  number: number;
+  x: number;
+  y: number;
 };
 
 type ChessPiece = {
@@ -24,23 +24,23 @@ const initPiece = (pieceName: string, pieceIsWhite: boolean, pieceCode: string, 
 };
 
 const whitePieces: ChessPiece[] = [
-  initPiece("Roi", true, "K", 1, { letter: "A", number: 1 }),
-  initPiece("Tour", true, "R", 2, { letter: "A", number: 3 }),
-  initPiece("Fou", true, "B", 3, { letter: "A", number: 4 }),
-  initPiece("Cavalier", true, "N", 4, { letter: "A", number: 5 }),
-  initPiece("Pion", true, "P", 5, { letter: "B", number: 1 })
+  initPiece("Roi", true, "K", 1, { x: 1, y: 1 }),
+  initPiece("Tour", true, "R", 2, { x: 1, y: 3 }),
+  initPiece("Fou", true, "B", 3, { x: 1, y: 4 }),
+  initPiece("Cavalier", true, "N", 4, { x: 1, y: 5 }),
+  initPiece("Pion", true, "P", 5, { x: 2, y: 1 })
 ];
 
 const blackPieces: ChessPiece[] = [
-  initPiece("Roi", false, "K", 1, { letter: "A", number: 1 }),
-  initPiece("Tour", false, "R", 2, { letter: "A", number: 3 }),
-  initPiece("Fou", false, "B", 3, { letter: "A", number: 4 }),
-  initPiece("Cavalier", false, "N", 4, { letter: "A", number: 5 }),
-  initPiece("Pion", false, "P", 5, { letter: "B", number: 1 })
+  initPiece("Roi", false, "K", 1, { x: 1, y: 1 }),
+  initPiece("Tour", false, "R", 2, { x: 1, y: 3 }),
+  initPiece("Fou", false, "B", 3, { x: 1, y: 4 }),
+  initPiece("Cavalier", false, "N", 4, { x:1, y: 5 }),
+  initPiece("Pion", false, "P", 5, { x: 2, y: 1 })
 ];
 
 describe('Test moves', () => {
-  const e: ChessPiece = initPiece("Roi", true, "K", 1, { letter: "A", number: 1 });
+  const e: ChessPiece = initPiece("Roi", true, "K", 1, { x:1, y: 1 });
 
   it(`The piece shoold exist first`, () => {
     const pieceCanMove = pieceExist(1, whitePieces);
@@ -48,18 +48,21 @@ describe('Test moves', () => {
   });
 
   it(`Test moov`, () => {
-    const pieceCanMove = movePiece("A", 6, 1, true);
+    const pieceCanMove = movePiece(1, 2, 1,true);
     expect(pieceCanMove).toStrictEqual(true);
   });
-
-
 });
 
 const pieceExist = (pieceId: number, pieces: ChessPiece[]): boolean => {
   return pieces.some(piece => piece.pieceId === pieceId);
 };
 
-const movePiece = (y: string, x: number, pieceId: number, isWhitePlayer: boolean) => {
+const testPiecePosition = (pieceId) => {
+  // pieceId.position.x compatible aveec le systeme de matrice des eche de A a F
+  // pieceId.position.y 1 à 6 je crois
+}
+
+const movePiece = (y: number, x: number, pieceId: number, isWhitePlayer: boolean) => {
   const pieces = isWhitePlayer ? whitePieces : blackPieces;
   
   //Icis
