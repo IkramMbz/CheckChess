@@ -42,27 +42,29 @@ const blackPieces: ChessPiece[] = [
 describe('Test moves', () => {
   const e: ChessPiece = initPiece("Roi", true, "K", 1, { letter: "A", number: 1 });
 
-  it(`Test moov`, () => {
-    const moviesFound = testMove("A", 6, 1, true);
-    expect(moviesFound).toStrictEqual(true);
+  it(`The piece shoold exist first`, () => {
+    const pieceCanMove = pieceExist(1, whitePieces);
+    expect(pieceCanMove).toStrictEqual(true);
   });
+
+  it(`Test moov`, () => {
+    const pieceCanMove = movePiece("A", 6, 1, true);
+    expect(pieceCanMove).toStrictEqual(true);
+  });
+
+
 });
 
 const pieceExist = (pieceId: number, pieces: ChessPiece[]): boolean => {
   return pieces.some(piece => piece.pieceId === pieceId);
 };
 
-
-const testMove = (y: string, x: number, pieceId: number, isWhitePlayer: boolean) => {
+const movePiece = (y: string, x: number, pieceId: number, isWhitePlayer: boolean) => {
   const pieces = isWhitePlayer ? whitePieces : blackPieces;
-
-  if (!pieceExist(pieceId, pieces)) {
-    console.log("La pièce avec l'ID", pieceId, "n'existe pas.");
-    return false;
-  } else {
-    console.log("Les pièces avec l'ID", pieceId, "sont :");
-    pieces.filter(piece => piece.pieceId === pieceId).forEach(piece => console.log(piece));
-    return true;
-  }
+  
+  //Icis
+  // pieces.filter(piece => piece.pieceId === pieceId).forEach(piece => console.log(piece));
+  // return true;
+    
 };
 
