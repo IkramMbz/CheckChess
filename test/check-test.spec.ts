@@ -36,7 +36,7 @@ const blackPieces: ChessPiece[] = [
   initPiece("Tour", false, "R", 2, { x: 1, y: 3 }),
   initPiece("Fou", false, "B", 3, { x: 1, y: 4 }),
   initPiece("Cavalier", false, "N", 4, { x:1, y: 5 }),
-  initPiece("Pion", false, "P", 5, { x: 2, y: 1 })
+  initPiece("Pion", false, "P", 7, { x: 9, y: 1 })
 ];
 
 describe('Test moves', () => {
@@ -47,9 +47,9 @@ describe('Test moves', () => {
     expect(pieceCanMove).toStrictEqual(true);
   });
 
-  it(`Test moov`, () => {
-    const pieceCanMove = movePiece(1, 2, 1,true);
-    expect(pieceCanMove).toStrictEqual(true);
+  it(`The piece position should not be correct`, () => {
+    const piecePosition = testPiecePosition(7, false);
+    expect(piecePosition).toStrictEqual(false);
   });
 });
 
@@ -57,10 +57,15 @@ const pieceExist = (pieceId: number, pieces: ChessPiece[]): boolean => {
   return pieces.some(piece => piece.pieceId === pieceId);
 };
 
-const testPiecePosition = (pieceId) => {
-  // pieceId.position.x compatible aveec le systeme de matrice des eche de A a F
-  // pieceId.position.y 1 à 6 je crois
-}
+const testPiecePosition = (pieceId: number, isWhitePlayer: boolean): boolean => {
+  const pieces = isWhitePlayer ? whitePieces : blackPieces;
+  const piece = pieces.find(piece => piece.pieceId === pieceId);
+
+  return !!piece && (
+    piece.position.x >= 1 && piece.position.x <= 8 &&
+    piece.position.y >= 1 && piece.position.y <= 8
+  );
+};
 
 const movePiece = (y: number, x: number, pieceId: number, isWhitePlayer: boolean) => {
   const pieces = isWhitePlayer ? whitePieces : blackPieces;
