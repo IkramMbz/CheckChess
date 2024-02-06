@@ -1,0 +1,13 @@
+const isInfixOf: (title: string) => (whole: string) => boolean = title => whole => whole.includes(title);
+
+const filter: <T>(predicate: (item: T) => boolean) => (items: T[]) => T[] = predicate => items => items.filter(predicate);
+
+const compose: <A, B, C>(f: (b: B) => C) => (g: (a: A) => B) => (x: A) => C = f => g => x => f(g(x));
+
+const getTitle: (movie: Movie) => string = movie => movie.title;
+
+/// DOMAIN ----
+
+const matches: (title: string) => (movie: Movie) => boolean = title => compose<Movie, string, boolean>(isInfixOf(title))(getTitle);
+
+const findByTitle: (title: string) => (movies: Movies) => Movies = compose<string, (item: Movie) => boolean, (collection: Movies) => Movies>(filter)(matches);
