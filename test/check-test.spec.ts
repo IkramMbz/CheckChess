@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest'
+import { Board } from '../Board'; 
+// import { Pawn } from '../pieces/Pawn.ts;
 
 type Position = {
   x: number;
@@ -100,7 +102,12 @@ describe('Test moves', () => {
     expect(knightInvalidMovement).toStrictEqual(false);
     expect(pawnInvalidMovement).toStrictEqual(false);
   });
-  
+
+  // it('should return correct possible moves from initial position', () => {
+  //   const board = new Board();
+  //   const pawn = new Pawn('White', { x: 0, y: 6 });
+  //   board.placePiece(pawn, pawn.position); 
+  // });
 });
 
 const pieceExist = (pieceId: number, pieces: ChessPiece[]): boolean => {
